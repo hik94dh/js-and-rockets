@@ -9,7 +9,7 @@ function fetchData() {
   axios.get("https://api.spacexdata.com/v3/launches/past")
     .then(response => renderData(prepareData(response.data)))
     .catch(error => console.log(error));
-}
+};
 
 function filterData(items) {
   if (items.length) {
@@ -28,7 +28,7 @@ function filterData(items) {
     }, []);
   }
   return [];
-}
+};
 
 const sortData = arr => arr.sort((prevItem, nextItem) => {
   const prevPayload = prevItem.rocket.second_stage.payloads.length;
@@ -47,7 +47,7 @@ const sortData = arr => arr.sort((prevItem, nextItem) => {
 const prepareData = response => sortData(filterData(response)).map(item => ({
   flight_number: item.flight_number,
   mission_name: item.mission_name,
-  payloads_count: get(item, 'rocket.second_stage.payloads').length,
+  payloads_count: get(item, 'rocket.second_stage.payloads').length
 }));
 
 const renderData = result => document.getElementById('out').innerHTML = JSON.stringify(result, undefined, 2);
